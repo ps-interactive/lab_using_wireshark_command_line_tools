@@ -1,0 +1,1 @@
+If you wish to develop your own plugins, https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=doc/README.plugins.

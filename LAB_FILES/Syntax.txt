@@ -1,0 +1,26 @@
+
+tshark -r fromSW-05testhost.pcapng.gz -Y 'not (eth.dst.ig == 1 or arp or (ip.src eq 10.0.0.0/8 and ip.dst eq 192.168.0.0/16) or (ip.dst eq 10.0.0.0/8 and ip.src eq 192.168.0.0/16))'
+
+tshark -r fromSW-05testhost.pcapng.gz -Y 'ip.addr eq 192.168.1.100 and not ip.addr eq 10.0.0.0/8'.  
+
+tshark -r fromSW-05testhost.pcapng.gz -Y 'not (eth.dst.ig == 1 or arp or (ip.src eq 10.0.0.0/8 and ip.dst eq 192.168.0.0/16) or (ip.dst eq 10.0.0.0/8 and ip.src eq 192.168.0.0/16))' -w fromSW-05testhost-forSuhani.pcapng.gz
+
+tshark -r fromSW-05testhost.pcapng.gz -qz io,stat,0,"AVG(tcp.analysis.initial_rtt)tcp.analysis.initial_rtt" 
+
+
+tshark -r dns-test.pcapng.gz -qz expert
+
+
+tshark -r dns-test.pcapng.gz -qz dns,tree
+
+
+tshark -r dns-test.pcapng.gz -T fields -e dns.qry.name | uniq -c
+
+
+tshark -r dns-test.pcapng.gz -qz endpoints,ip
+
+
+tshark -r dns-test.pcapng.gz -Y udp.dstport==53 -T fields -e ip.src -e dns.qry.name | uniq -c > dnsclients.txt
+
+cat dnsclients.txt 
+
